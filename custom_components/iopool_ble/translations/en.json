@@ -1,0 +1,122 @@
+{
+  "config": {
+    "flow_title": "{name}",
+    "step": {
+      "confirm": {
+        "description": "Add {name}?\n\nThe probe is read from its Bluetooth broadcasts only. Its readings stay raw until you calibrate it from this entry's Configure button."
+      },
+      "user": {
+        "data": {
+          "address": "Device"
+        },
+        "description": "Choose an iopool EcO. Only probes a Bluetooth adapter or proxy has heard recently are listed; the probe broadcasts rarely."
+      }
+    },
+    "abort": {
+      "already_configured": "Device is already configured",
+      "no_devices_found": "No iopool EcO heard. The probe broadcasts rarely - wake it and try again.",
+      "not_supported": "This device is not an iopool EcO."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "menu_options": {
+          "add_point": "Add a calibration point",
+          "clear_points": "Clear calibration points",
+          "settings": "Settings"
+        }
+      },
+      "add_point": {
+        "title": "Add a calibration point",
+        "description": "Put the probe in a reference (a pH buffer, an ORP solution, water with a thermometer in it), wait for the raw value to settle, then enter the trusted value here.\n\nLive raw values - pH: {ph_raw}, ORP: {orp_raw}, thermistor: {temperature_raw} Ω.\nPoints so far - pH: {ph_points}, ORP: {orp_points}, temperature: {temperature_points}.\n\nEach quantity needs two points at different values before it shows a reading.",
+        "data": {
+          "quantity": "Quantity",
+          "reference": "Trusted value (pH, mV or °C)",
+          "raw": "Raw value (leave blank to use the live one)"
+        }
+      },
+      "clear_points": {
+        "title": "Clear calibration points",
+        "description": "Points so far - pH: {ph_points}, ORP: {orp_points}, temperature: {temperature_points}.\n\nThe chosen quantities go back to unavailable until calibrated again.",
+        "data": {
+          "quantity": "Quantities to clear"
+        }
+      },
+      "settings": {
+        "title": "Settings",
+        "data": {
+          "stale_after_minutes": "Minutes without a new beacon before readings go unavailable"
+        }
+      }
+    },
+    "error": {
+      "no_fresh_reading": "The probe has sent no fresh reading. Wait for one, or type the raw value."
+    }
+  },
+  "selector": {
+    "quantity": {
+      "options": {
+        "ph": "pH",
+        "orp": "ORP (mV)",
+        "temperature": "Temperature (°C)"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "orp": {
+        "name": "ORP"
+      },
+      "ph_raw": {
+        "name": "pH raw"
+      },
+      "orp_raw": {
+        "name": "ORP raw"
+      },
+      "temp_ohms": {
+        "name": "Thermistor resistance"
+      },
+      "cond_raw": {
+        "name": "Conductivity raw"
+      },
+      "sequence": {
+        "name": "Beacon sequence"
+      },
+      "mode": {
+        "name": "Mode"
+      },
+      "activity": {
+        "name": "Activity"
+      },
+      "minute": {
+        "name": "Minute counter"
+      },
+      "last_reading": {
+        "name": "Last new reading"
+      },
+      "last_frame": {
+        "name": "Last beacon type",
+        "state": {
+          "measurement": "Measurement",
+          "test_pattern": "Start-up test pattern",
+          "blank": "Blank"
+        }
+      },
+      "firmware": {
+        "name": "Firmware version"
+      }
+    },
+    "button": {
+      "measure_now": {
+        "name": "Measure now"
+      },
+      "identify": {
+        "name": "Identify (beep)"
+      },
+      "read_firmware": {
+        "name": "Read firmware version"
+      }
+    }
+  }
+}
