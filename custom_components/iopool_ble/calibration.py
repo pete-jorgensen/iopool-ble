@@ -1,7 +1,6 @@
 """Calibration: turn the probe's raw integers into real units from reference readings.
 
-The probe sends raw counts and the scaling lives in iopool's cloud, so nothing here ships a
-constant. A quantity has a value only once enough reference points have been entered for
+The probe sends raw counts and no scaling, so nothing here ships a constant. A quantity has a value only once enough reference points have been entered for
 it; until then it has none, and the entity is unavailable rather than guessed.
 
 No Home Assistant imports, so the tests and any offline tool can load this file directly.

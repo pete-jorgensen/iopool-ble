@@ -29,10 +29,6 @@ class EcoButtonDescription(ButtonEntityDescription):
 
 BUTTONS: tuple[EcoButtonDescription, ...] = (
     EcoButtonDescription(
-        key="measure_now", translation_key="measure_now",
-        press=lambda hass, c: active.measure_now(hass, c.address),
-    ),
-    EcoButtonDescription(
         key="identify", translation_key="identify",
         entity_category=EntityCategory.DIAGNOSTIC,
         press=lambda hass, c: active.beep(hass, c.address),

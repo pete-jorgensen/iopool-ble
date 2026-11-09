@@ -19,15 +19,15 @@ flowchart LR
 - **Reads the probe passively.** The EcO broadcasts each measurement in a Bluetooth
   advertisement. The integration decodes it; it never connects to take a reading, so it
   uses no connection slot and works through any Bluetooth proxy that can hear the probe.
-- **Lets you calibrate the probe yourself.** The probe sends raw values; iopool's
-  conversion to real units lives in their cloud. Here you enter reference readings (a pH
+- **Lets you calibrate the probe yourself.** The probe sends raw values, not real
+  units. Here you enter reference readings (a pH
   buffer, an ORP solution, a thermometer) and the integration fits the conversion. Until a
   quantity is calibrated, its calibrated sensor is **unavailable** — it never shows a guess.
 - **Says when the probe has stopped measuring.** Readings go unavailable when no **new**
   measurement has arrived within a set time (60 minutes by default). A probe that keeps
   repeating one old beacon counts as stale, however recently it was heard.
-- **Three buttons that connect briefly** — *Read firmware version*, *Identify (beep)* and
-  *Measure now*. Each press makes one short connection and drops it.
+- **Two buttons that connect briefly** — *Read firmware version* and *Identify (beep)*.
+  Each press makes one short connection and drops it.
 
 ## Supported device
 
@@ -89,12 +89,10 @@ the list may be empty for a few minutes after a restart.
 | --- | --- |
 | Read firmware version | reads the version; changes nothing on the probe |
 | Identify (beep) | the probe beeps |
-| Measure now | asks the probe for five live measurements |
 
 The buttons need an adapter or proxy that can **connect** (an ESPHome proxy with active
 connections enabled), and the probe accepts one connection at a time — a press fails while
 the iopool phone app is connected to it. A failed press raises an error that says why.
-Reset and the mode-change commands are deliberately not implemented.
 
 ## Calibration
 
@@ -116,11 +114,10 @@ squares. pH and ORP are a straight line. Temperature uses the thermistor beta mo
 replacement probe starts uncalibrated. **Clear calibration points** starts a quantity again.
 pH is not temperature-compensated.
 
-What one probe showed, as a starting point and not a substitute for references: raw ORP
-tracked the iopool app's ORP in millivolts almost exactly; raw pH behaved like the
-electrode's millivolts about pH 7 (negative above pH 7); and the thermistor matched a
-10 kΩ, beta 3950 part. The iopool app's own readings, taken alongside a beacon, are usable
-reference points while you still have the app.
+Typical raw values, as a starting point and not a substitute for references: raw ORP is
+close to millivolts; raw pH behaves like the electrode's millivolts about pH 7 (negative
+above pH 7); and the thermistor is close to a 10 kΩ, beta 3950 part. A reading from the
+iopool app, taken at the same time as a beacon, can also serve as a reference point.
 
 **Settings** (same menu) sets how many minutes without a new beacon before readings go
 unavailable.
@@ -140,8 +137,7 @@ Run the tests with `python -m pytest tests -q` (needs only `pytest`).
 ## Status
 
 Early. The readings and calibration run in a live Home Assistant instance, and *Read
-firmware version* and *Identify* have worked against a real probe; whether *Measure now*
-makes the probe measure at once is not yet confirmed. Tested against one
+firmware version* and *Identify* have worked against a real probe. Tested against one
 probe; reports from other probes and firmware versions are welcome.
 
 Not affiliated with iopool.

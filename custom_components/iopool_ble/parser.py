@@ -32,7 +32,7 @@ KIND_TEST_PATTERN = "test_pattern"
 KIND_BLANK = "blank"
 
 # Sent under the name "EC000000" while the probe starts up: a counting filler, not a
-# reading. Decoded naively it gives ph 257, orp 514.
+# reading. Read as a measurement it would give ph 257, orp 514.
 _TEST_PATTERN = bytes.fromhex("ab01010202030304040a0b0c")
 
 

@@ -1,12 +1,12 @@
 """Holds the latest beacon from one probe and decides whether it is still fresh.
 
-Passive: every reading arrives in an advertisement, through
-whichever adapter or proxy Home Assistant hears it on.
+Passive: every reading arrives in an advertisement, through whichever adapter or proxy
+Home Assistant hears it on.
 
 Freshness is this integration's own, not Home Assistant's "device is in range". A probe
-that has stopped measuring must not look alive, so readings go
-unavailable when no NEW beacon has arrived within the configured time — a probe that keeps
-repeating one old beacon is stale, however recently it was heard.
+that has stopped measuring must not look alive, so readings go unavailable when no NEW
+beacon has arrived within the configured time — a probe that keeps repeating one old
+beacon is stale, however recently it was heard.
 """
 
 from __future__ import annotations

@@ -5,8 +5,7 @@ only when a button is pressed, held for one read or write, and dropped. It needs
 adapter or proxy that can connect and that hears the probe; the probe takes one
 connection at a time, so it fails while the iopool phone app is connected.
 
-Only harmless commands are implemented: reset and the mode changes are deliberately
-absent.
+It does two things: read the firmware version, and beep.
 """
 
 from __future__ import annotations
@@ -28,12 +27,10 @@ _LOGGER = logging.getLogger(__name__)
 
 _BASE = "f3a0{:04x}-f0a2-9b06-0c59-1bc4763b5c00"
 SERVICE = _BASE.format(0x0001)
-CHAR_LIVE_MODE_COUNTER = _BASE.format(0x000A)
 CHAR_BEEP = _BASE.format(0x0009)
 CHAR_SOFTWARE_VERSION = _BASE.format(0x0011)
 
 BEEP = (200).to_bytes(2, "little")
-LIVE_MEASUREMENTS = 5  # measurements asked for per live-mode request
 
 _lock = asyncio.Lock()
 
@@ -111,8 +108,3 @@ async def read_firmware_version(hass: HomeAssistant, address: str) -> str:
 async def beep(hass: HomeAssistant, address: str) -> None:
     """Make the probe beep, to find it or to prove the link."""
     await _write(hass, address, CHAR_BEEP, BEEP)
-
-
-async def measure_now(hass: HomeAssistant, address: str) -> None:
-    """Put the probe in live mode, so it measures now instead of at its next slot."""
-    await _write(hass, address, CHAR_LIVE_MODE_COUNTER, bytes([LIVE_MEASUREMENTS, 0]))
