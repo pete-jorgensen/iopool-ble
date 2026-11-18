@@ -36,9 +36,14 @@ The **iopool EcO** probe (Bluetooth manufacturer ID `0x074C`, beacon layout 1). 
 
 ## Install
 
-### HACS (custom repository)
+### From HACS (recommended)
 
-Until the integration is in the HACS default list:
+1. In HACS, search for **iopool EcO (Bluetooth)**
+2. Install it, then restart Home Assistant
+
+### HACS custom repository
+
+Only if your HACS does not list it yet:
 
 1. HACS → three-dot menu → **Custom repositories**
 2. Add `https://github.com/pete-jorgensen/iopool-ble`, category **Integration**
